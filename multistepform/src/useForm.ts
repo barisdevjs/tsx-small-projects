@@ -2,7 +2,10 @@ import { ReactElement, useState } from "react";
 
 
 export function useForm(steps: ReactElement[]) {
-    const [currIdx, setCurrIdx] = useState(0);
+    const [currIdx, setCurrIdx] = useState(2);
+
+    const isFirstStep:boolean = currIdx === 0;
+    const isLastStep:boolean = currIdx === steps.length - 1;
 
     function next() {
         setCurrIdx(i => {
@@ -29,5 +32,7 @@ export function useForm(steps: ReactElement[]) {
         next,
         prev,
         goTo,
+        isFirstStep,
+        isLastStep
     }
 }
