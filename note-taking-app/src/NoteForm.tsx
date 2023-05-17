@@ -6,11 +6,11 @@ import { NoteFormP, Tag } from './Types';
 import { v4 as uuidV4 } from 'uuid';
 
 
-function NoteForm({ onSubmit, onAddTag, availableTags } : NoteFormP) {
+function NoteForm({ onSubmit, onAddTag, availableTags,title="", markdown="",tags=[] } : NoteFormP) {
   const navigate = useNavigate();
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags)
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -31,13 +31,14 @@ function NoteForm({ onSubmit, onAddTag, availableTags } : NoteFormP) {
           <Col>
             <Form.Group controlId='title' >
               <Form.Label >Title</Form.Label>
-              <Form.Control ref={titleRef} placeholder="Enter title" required />
+              <Form.Control ref={titleRef} placeholder="Enter title" required defaultValue={title} />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group controlId='tags'>
-              <Form.Label >Tags</Form.Label>
-              <CreatableReactSelect isMulti value={selectedTags.map(t => {
+              <Form.Label>Tags</Form.Label>
+              <CreatableReactSelect isMulti 
+              value={selectedTags.map(t => {
                 return { label : t.label, value : t.id}
               })}
                onChange={tags => {
@@ -61,12 +62,12 @@ function NoteForm({ onSubmit, onAddTag, availableTags } : NoteFormP) {
         </Row>
         <Form.Group controlId='markdown'>
           <Form.Label >Markdown</Form.Label>
-          <Form.Control ref={markdownRef} placeholder="Enter Description" required as="textarea" rows={15} />
+          <Form.Control ref={markdownRef} placeholder="Enter Description" required as="textarea" rows={15} defaultValue={markdown} />
         </Form.Group>
         <Stack direction={"horizontal"} gap={2} className="justify-content-end">
           <Button type="submit" variant="outline-primary">Save</Button>
           <Link to="..">
-            <Button type="button" variant="outline-secondary" >Cancel</Button>
+            <Button type="button" variant="outline-secondary">Cancel</Button>
           </Link>
         </Stack>
       </Stack>
