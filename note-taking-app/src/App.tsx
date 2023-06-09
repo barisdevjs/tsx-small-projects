@@ -59,7 +59,7 @@ function App() {
     })
   }
 
-  function updateTag(id:string, label:string) {
+  function updateTag(id: string, label: string) {
     setTags(prevTags => {
       return prevTags.map(tag => {
         if (tag.id === id) {
@@ -73,11 +73,9 @@ function App() {
 
   return (
     <Container className="my-4">
-      <Routes><Route path="/" element={<NoteList notes={notesWithTags} availableTags={tags}
-        onUpdateTag={updateTag}
-        onDeleteTag={removeTag}
-      />} />
-
+      <Routes>
+        <Route path="/" element={<NoteList notes={notesWithTags} availableTags={tags}
+        onUpdateTag={updateTag} onDeleteTag={removeTag} />} />
         <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags} />} />
         <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<Note onDelete={onDeleteNote} />} />
@@ -85,7 +83,7 @@ function App() {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Container>
+  </Container>
   )
 }
 
