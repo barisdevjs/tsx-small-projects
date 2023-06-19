@@ -1,6 +1,5 @@
-import React from 'react'
 import NoteForm from './NoteForm'
-import { NoteEditP, NoteFormP } from './Types'
+import { NoteEditP} from './Types'
 import { useNote } from './NoteLayout'
 
 function EditNote({ onSubmit, onAddTag, availableTags }: NoteEditP) {
