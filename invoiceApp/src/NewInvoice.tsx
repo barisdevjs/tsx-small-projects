@@ -4,12 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 import type { DatePickerProps, RadioChangeEvent } from 'antd';
 import dayjs from 'dayjs';
 import { useInvoice } from './Context';
+import { useTranslation } from 'react-i18next';
+
 
 function NewInvoice() {
 
     const [form] = Form.useForm();
     const { addInvoice } = useInvoice();
     const navigate = useNavigate();
+    const { t } = useTranslation();
+
 
     const onFinish = (values: any) => {
         const uuid = uuidv4();
@@ -74,7 +78,7 @@ function NewInvoice() {
         <Space direction='vertical'>
             <Row gutter={[24, 24]} justify={"start"} align={"middle"} className="mx-8 px-8 my-4">
                 <Col span={24}>
-                    <Typography.Title level={4}>Create A New Invoice</Typography.Title>
+                    <Typography.Title level={4}>{t("allInvoices")}</Typography.Title>
                 </Col>
             </Row>
             <Form

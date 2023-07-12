@@ -1,6 +1,9 @@
 import { Col, Row, Table, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import {  InvoiceT, useInvoice } from './Context';
+import { useTranslation } from 'react-i18next';
+import EmailLink from './Mail';
+
 
 
 const statusFilters =  [
@@ -68,16 +71,24 @@ const columns: ColumnsType<InvoiceT> = [
         key: 'status',
         onFilter: (value: string | number | boolean, record: InvoiceT) => record.status === value.toString(),
         filters: statusFilters
-      }
+      },
+      {
+        title: 'Actions',
+        key: 'actions',
+        render: (_, record) => <EmailLink invoice={record} />,
+        align:"center"
+      },
 ];
 
 function Home() {
     const { items } = useInvoice();
+    const { t } = useTranslation();
+
 
     return (
         <Row gutter={[24,24]} justify={"center"} align={"middle"} className="mx-8 px-8 my-4">
             <Col span={24}>
-                <Typography.Title level={4}>All Invoices</Typography.Title>
+                <Typography.Title level={4}>{t("allInvoices")}</Typography.Title>
             </Col>
             <Col span={24}>
                 <Table 

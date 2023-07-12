@@ -5,25 +5,28 @@ import NewInvoice from './NewInvoice';
 import Home from './Home';
 import type { MenuProps } from 'antd';
 import styles from './styles.module.css'
+import { useTranslation } from 'react-i18next';
+import Language from './Language';
 
 const { Header, Content, Footer } = Layout;
 
-const items = [{
-  key: '/',
-  label: 'Home',
-},
-{
-  key:"newInvoice",
-  label: 'New Invoice',
-}
-]
 
 const App: React.FC = () => {
+  const { t } = useTranslation();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
+  
   const navigate = useNavigate();
+  const items = [{
+    key: '/',
+    label: t('home'),
+  },
+  {
+    key:"newInvoice",
+    label: t('newInvoice'),
+  }
+  ]
 
   const onClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
@@ -40,6 +43,7 @@ const App: React.FC = () => {
           items={items}
           onClick={onClick}
         />
+        <Language />
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <div className="site-layout-content w-auto h-auto m-4 flex flex-col gap-y-4" style={{ background: colorBgContainer }}>
