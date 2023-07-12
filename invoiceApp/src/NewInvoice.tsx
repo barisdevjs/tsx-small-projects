@@ -76,7 +76,7 @@ function NewInvoice() {
         <Space direction='vertical'>
             <Row gutter={[24, 24]} justify={"start"} align={"middle"} className="mx-8 px-8 my-4">
                 <Col span={24}>
-                    <Typography.Title level={4}>{t("allInvoices")}</Typography.Title>
+                    <Typography.Title level={4}>{t("createNewInvoice")}</Typography.Title>
                 </Col>
             </Row>
             <Form
