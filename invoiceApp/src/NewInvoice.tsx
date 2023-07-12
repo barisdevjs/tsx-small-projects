@@ -25,7 +25,6 @@ function NewInvoice() {
             amount: amount,
             date: formattedDate,
         };
-        console.log('Success:', updatedValues);
         addInvoice(updatedValues);
         onReset();
         navigate("/")
@@ -41,7 +40,6 @@ function NewInvoice() {
 
     const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
         const formattedDate = dayjs(date).format('YYYY-MM-DD');
-        console.log(formattedDate);
     };
 
     const initialVals = {
@@ -71,7 +69,7 @@ function NewInvoice() {
       ];
 
       const onChangeRadio = ({ target: { value } }: RadioChangeEvent) => {
-        console.log('radio4 checked', value);
+        console.log('radio checked', value);
       };
 
     return (
