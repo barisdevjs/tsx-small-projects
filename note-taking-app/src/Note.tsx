@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNote } from './NoteLayout'
 import { Badge, Button, Col, Row, Stack } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,8 +29,7 @@ function Note({onDelete} : NoteDeleteP ) {
                 <Button>Edit</Button>
             </Link>
             <Button variant="outline-danger" onClick={() => {
-                onDelete(note.id)
-                navigate("/")
+                onDelete(note.id) , navigate("/")
                 }}>Delete</Button>
             <Link to="/">
                 <Button variant="outline-secondary">Back</Button>
