@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import  { FormEvent, useRef, useState } from 'react';
 import { Form, Stack, Row, Col, Button } from "react-bootstrap";
 import CreatableReactSelect from "react-select/creatable";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { NoteFormP, Tag } from './Types';
 import { v4 as uuidV4 } from 'uuid';
 
 
-function NoteForm({ onSubmit, onAddTag, availableTags,title="", markdown="",tags=[] } : NoteFormP) {
+function NoteForm({ onSubmit, onAddTag, availableTags, title="", markdown="", tags=[] } : NoteFormP) {
   const navigate = useNavigate();
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
@@ -35,7 +35,7 @@ function NoteForm({ onSubmit, onAddTag, availableTags,title="", markdown="",tags
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId='tags'>
+            <Form.Group  controlId='tags'>
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect isMulti 
               value={selectedTags.map(t => {
@@ -50,7 +50,7 @@ function NoteForm({ onSubmit, onAddTag, availableTags,title="", markdown="",tags
                }}
                onCreateOption={label => {
                 const newTag = {id: uuidV4(), label}
-                onAddTag(newTag)
+                onAddTag(newTag);
                 setSelectedTags(prev => [...prev, newTag])
                }}
                options={availableTags.map(t => {
