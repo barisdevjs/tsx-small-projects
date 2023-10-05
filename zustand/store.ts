@@ -1,20 +1,29 @@
-import { create } from "zustand";
-import { Task, TaskState } from "./src/types"
+import { TaskT, TaskStateT } from "./src/types"
+import { createWithEqualityFn } from "zustand/traditional";
 
 
-interface StoreState {
-    tasks: Task[];
-  }
-  
-  interface StoreActions {
-    addTask: (task: Task) => void;
-  }
-  const useStore = create<StoreState & StoreActions>((set) => ({
-    tasks: [{ title: "TestTask", state: TaskState.PLANNED }],
-  
-    addTask: (task: Task) => {
-      set((state) => ({ tasks: [...state.tasks, task] }));
+export interface StoreStateT {
+    tasks: TaskT[];
+    addTask: (task: TaskT) => void;
+}
+
+
+const useStore = createWithEqualityFn<StoreStateT>((set) => ({
+    tasks: [
+        { title: "Test 1", state: TaskStateT.PLANNED },
+        { title: "Test 2", state: TaskStateT.ONGOING },
+        { title: "Test 3", state: TaskStateT.DONE },
+    ],
+
+    addTask: (task: TaskT) => {
+        set((state) => ({ tasks: [...state.tasks, task] }));
     },
-  }));
-  
-  export default useStore;
+    removeTask: (task: TaskT) => {
+        set((state) => ({ tasks: state.tasks.filter((t) => t.title !== task.title) }));
+    },
+    removeTask2: (task: TaskT) => {
+        set((state) => ({ tasks: state.tasks.filter((t) => !Object.is(t, task)) }));
+    },
+}), Object.is);
+
+export default useStore;

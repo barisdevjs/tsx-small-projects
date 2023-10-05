@@ -1,0 +1,2 @@
+- shallow makes the comparison based on the content of the array
+- 

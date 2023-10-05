@@ -1,10 +1,10 @@
-export enum TaskState {
+export enum TaskStateT {
     PLANNED = 'PLANNED',
     ONGOING = 'ONGOING',
     DONE = 'DONE',
 }
 
-export interface Task {
-    state: TaskState;
+export interface TaskT {
+    state: TaskStateT;
     title: string;
 }

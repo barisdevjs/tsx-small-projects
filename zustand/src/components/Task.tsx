@@ -1,15 +1,18 @@
+import useStore from "../../store";
 import styles from "../../styles.module.css";
-import { TaskState } from "../types";
+import { TaskT } from "../types";
+import { shallow } from 'zustand/shallow';
 
-const STATUS = "ONGOING";
 
-function Task({ title, state }: { title: string, state: TaskState }) {
+function Task({ title, state }: TaskT) {
+  const task = useStore((store) => store.tasks.find((t:TaskT) => t.title === title), shallow)
+  
   return (
     <div className={styles.task}>
-      <div>{title}</div>
+      <div>{task?.title}</div>
       <div className={`${styles.bottomWrapper} ${styles[state.toLowerCase()]}`}>
         <div></div>
-        <div className={`${styles.status} ${styles[state.toLowerCase()]}`}>{STATUS}</div>
+        <div className={`${styles.status} ${styles[state.toLowerCase()]}`}>{task?.state}</div>
       </div>
     </div>
   );
