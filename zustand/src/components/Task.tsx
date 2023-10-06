@@ -7,7 +7,7 @@ import { shallow } from 'zustand/shallow';
 function Task({ title, state }: TaskT) {
   const task = useStore((store) => store.tasks.find((t: TaskT) => t.title === title), shallow)
   const removeTask2 = useStore((store) => store.removeTask2)
-  const setDraggedTask = useStore((store) => store.setDraggedTasks)
+  const setDraggedTask = useStore((store) => store.setDraggedTask )
 
   if (!task) return null
 

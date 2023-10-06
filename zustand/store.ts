@@ -8,7 +8,7 @@ export interface StoreStateT {
     removeTask: (task: TaskT) => void;
     removeTask2: (task: TaskT) => void;
     draggedTask: null | TaskT;
-    setDraggedTasks: (task: TaskT | null) => void;
+    setDraggedTask: (task: TaskT | null) => void;
     moveTask :(task: TaskT) => void;
 }
 
@@ -20,10 +20,16 @@ const useStore = createWithEqualityFn<StoreStateT>((set) => ({
         { title: "Test 3", state: TaskStateT.DONE },
     ],
     draggedTask: null as TaskT | null,
-    setDraggedTasks: (task: TaskT | null) => set({ draggedTask: task }),
-    moveTask: (task) => set((store) => ({
-        tasks: store.tasks.map((t: TaskT) => (t.title === task.title ? { ...t, state:t.state  } : t))
-    })),
+    setDraggedTask: (task: TaskT | null) => set({ draggedTask: task }),
+    moveTask: (task) => set((store) => {
+        const updatedTasks = store.tasks.map((t) => (t.title === task.title ? { ...t, state: task.state } : t));
+    
+        console.log("Before update:", store.tasks);
+        console.log("After update:", updatedTasks);
+    
+        return { tasks: updatedTasks };
+    }),
+    
     addTask: (task: TaskT) => {
         set((state) => ({ tasks: [...state.tasks, task] }));
     },
