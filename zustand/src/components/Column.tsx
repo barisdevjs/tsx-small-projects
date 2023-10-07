@@ -15,14 +15,21 @@ function Column({ state }: TaskT) {
 
     const [text, setText] = useState("");
     const [open, setOpen] = useState(false);
+    const [drop, setDrop] = useState(false);
 
     return (
-        <div className={styles.column}
+        <div className={`${styles.column} ${drop ? styles.true : ''}`}
             onDragOver={(e) => {
+                setDrop(true);
+                e.preventDefault();
+            }}
+            onDragLeave={(e) => {
+                setDrop(false);
                 e.preventDefault()
             }}
             onDrop={() => {
                 if (draggedTask) {
+                    setDrop(false);
                     moveTask({ ...draggedTask, state });
                     setDraggedTask(null);
                 }
