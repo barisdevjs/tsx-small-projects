@@ -43,12 +43,16 @@ function Column({ state }: TaskT) {
             ))}
             {open && <div className={styles.modal}>
                 <div className={styles.modalContent}>
-                    <input onChange={(e) => setText(e.target.value)} value={text} />
+                    <input onChange={(e) => setText(e.target.value)} value={text} 
+                    placeholder="Type here..."/>
+                    <div className={styles.modalContentDiv}>
                     <button onClick={() => {
                         addTask({ state: state, title: text });
                         setText('');
                         setOpen(false);
                     }}>ADD TASK</button>
+                    <button onClick={()=> setOpen(false)}>CLOSE</button>
+                    </div>
                 </div>
             </div>}
         </div>
