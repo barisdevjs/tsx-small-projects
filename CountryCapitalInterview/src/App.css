@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.flexApp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border: 1px dashed greenyellow;
+  padding: 2rem;
+}
