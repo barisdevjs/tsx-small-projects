@@ -72,3 +72,8 @@ button:focus-visible {
   background-color: blue;
   color: white;
 }
+
+.wrong {
+  background-color: red;
+  color: white;
+}
