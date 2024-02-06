@@ -1,23 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { AppDispatch, RootState } from "../store";
 import { useEffect } from "react";
 import { fetchProducts } from "../slices/eCommerceSlice";
+import ProductsTable from "../components/ProductsTable";
 
 function Ecommerce() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const products = useSelector(
     (state: RootState) => state.productsReducer.products
   );
 
+  const status =
+    useSelector((state: RootState) => state.productsReducer.status) ===
+    "loading"
+      ? true
+      : false;
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  return (
-    <div style={{ width: 640, height: 700, backgroundColor: "yellow" }}>
-      Ecommerce
-      {JSON.stringify(products, null, 2)}
-    </div>
-  );
+  return <ProductsTable status={status} products={products} />;
 }
 
 export default Ecommerce;
