@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Ecommerce from "./pages/E-Commerce.tsx";
 import MultiStepFrom from "./pages/MultiStepFrom.tsx";
 import Navbar from "./components/Navbar.tsx";
+import SingleProduct from "./components/SingleProduct.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,13 @@ export const router = createBrowserRouter([
         id: "2",
         element: <Ecommerce />,
         loader: () => <div>Loading...</div>,
+        children:[
+          {
+            path: ":id", 
+            id: "4",
+            element: <SingleProduct />,
+          },
+        ]
       },
       {
         path: "/form",

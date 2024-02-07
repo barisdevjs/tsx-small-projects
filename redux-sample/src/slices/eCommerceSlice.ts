@@ -1,4 +1,4 @@
-import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IECommerce } from "../types/generalTypes";
 
 // const initialState: IECommerce = {
@@ -14,12 +14,9 @@ import { IECommerce } from "../types/generalTypes";
 //   },
 // };
 
-export type TFetchProductsThunk = AsyncThunk<IECommerce[], void, object>;
-
-// change status Enums
 const initialState: {
   products: IECommerce[];
-  status: "idle" | "loading" | "failed" | "success";
+  status: "idle" | "loading" | "failed";
 } = {
   products: [],
   status: "idle",
@@ -35,7 +32,7 @@ const productsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = "success";
+        state.status = "idle";
         state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state) => {
@@ -44,7 +41,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const fetchProducts: TFetchProductsThunk = createAsyncThunk(
+export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -56,4 +53,5 @@ export const fetchProducts: TFetchProductsThunk = createAsyncThunk(
   }
 );
 
+export const productsActions = productsSlice.actions;
 export default productsSlice.reducer;

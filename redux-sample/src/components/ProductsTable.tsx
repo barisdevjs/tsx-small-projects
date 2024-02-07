@@ -2,7 +2,7 @@ import { Space, Table, Image, Input, Button, InputRef } from "antd";
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import type { FilterDropdownProps, SortOrder } from "antd/es/table/interface";
+import type { FilterDropdownProps} from "antd/es/table/interface";
 import type { Key } from "react";
 import { IECommerce } from "../types/generalTypes";
 
@@ -141,7 +141,6 @@ const ProductsTable: React.FC<{ products: IECommerce[]; status: boolean }> = ({
       title: "Price",
       dataIndex: "price",
       key: "price",
-      defaultSortOrder: "descend" as SortOrder,
       sorter: (a: IECommerce, b: IECommerce) => a.price - b.price,
     },
     {
