@@ -5,8 +5,9 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { Layout, Menu } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
+import { Content } from "antd/es/layout/layout";
 
 const items: MenuProps["items"] = [
   {
@@ -36,15 +37,17 @@ function Navbar() {
   };
 
   return (
-    <>
+    <Layout>
       <Menu
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
         items={items}
       />
-      <Outlet />
-    </>
+      <Content style={{ padding: "2rem" }}>
+        <Outlet />
+      </Content>
+    </Layout>
   );
 }
 

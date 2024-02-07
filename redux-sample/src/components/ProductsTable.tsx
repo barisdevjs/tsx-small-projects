@@ -2,9 +2,10 @@ import { Space, Table, Image, Input, Button, InputRef } from "antd";
 import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import type { FilterDropdownProps} from "antd/es/table/interface";
+import type { FilterDropdownProps } from "antd/es/table/interface";
 import type { Key } from "react";
 import { IECommerce } from "../types/generalTypes";
+import { Link } from "react-router-dom";
 
 const ProductsTable: React.FC<{ products: IECommerce[]; status: boolean }> = ({
   products,
@@ -175,13 +176,12 @@ const ProductsTable: React.FC<{ products: IECommerce[]; status: boolean }> = ({
         },
       ],
     },
-
     {
       title: "Action",
       key: "action",
       render: (_: unknown, record: IECommerce) => (
         <Space size="middle">
-          <a>Details of {record.id}</a>
+          <Link to={`/ecommerce/${record.id}`}>Details of {record.id}</Link>
         </Space>
       ),
     },

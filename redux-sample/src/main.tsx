@@ -11,26 +11,20 @@ import SingleProduct from "./components/SingleProduct.tsx";
 export const router = createBrowserRouter([
   {
     path: "/",
-    id: "1",
     element: <Navbar />,
     children: [
       {
-        path: "/ecommerce",
-        id: "2",
-        element: <Ecommerce />,
-        loader: () => <div>Loading...</div>,
-        children:[
-          {
-            path: ":id", 
-            id: "4",
-            element: <SingleProduct />,
-          },
-        ]
+        path: "/form",
+        element: <MultiStepFrom />,
       },
       {
-        path: "/form",
-        id: "3",
-        element: <MultiStepFrom />,
+        path: "/ecommerce",
+        element: <Ecommerce />,
+        loader: () => <div>Loading...</div>,
+      },
+      {
+        path: "/ecommerce/:id",
+        element: <SingleProduct />,
       },
     ],
   },

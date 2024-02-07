@@ -1,12 +1,10 @@
 import { useParams } from "react-router-dom";
 
-export default function SingleProduct () {
-const {id} = useParams();
-console.log({id})
+export default function SingleProduct() {
+  const { id } = useParams();
   return (
-      <div>
-        Sample Page
+    <div>
+      Sample Page ID ==`{">"}`{id}
     </div>
   );
-};
-
+}
