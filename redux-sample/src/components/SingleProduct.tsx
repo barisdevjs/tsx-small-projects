@@ -3,19 +3,25 @@ import { useEffect, useState } from "react";
 import { fetchProductsById } from "../slices/eCommerceSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
-import { Button, Card, Descriptions, Image, Modal, Segmented } from "antd";
+import { Card, Image, Modal, Segmented, Space, Typography } from "antd";
 import type { DescriptionsProps } from "antd";
 import { IECommerce } from "../types/generalTypes";
 import { capitalizeFirstLetter } from "../utils/helpers";
-import { FastBackwardOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import styles from "../styles.module.css"
+import { FastBackwardOutlined, EllipsisOutlined } from "@ant-design/icons";
+import styles from "../styles.module.css";
+import { SegmentedLabeledOption } from "antd/es/segmented";
 const { Meta } = Card;
+const { Text } = Typography;
+
+type TFilter = "id" | "category" | "price";
+type SegmentedItemOption = SegmentedLabeledOption<TFilter>;
 
 export default function SingleProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSegment, setSelectedSegment] = useState<TFilter>("id");
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -23,14 +29,11 @@ export default function SingleProduct() {
     setIsModalOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   const product = useSelector(
     (state: RootState) => state.productsReducer.singleProduct
   );
   const keyValuesArray: DescriptionsProps["items"] = Object.keys(product)
-    .filter((key) => key !== "rating" )
+    .filter((key) => key !== "rating")
     .map((key, i) => ({
       key: i,
       label: capitalizeFirstLetter(key),
@@ -60,32 +63,58 @@ export default function SingleProduct() {
   const image = imageItem
     ? (imageItem.children as React.ReactElement)?.props.src
     : "";
-console.log(keyValuesArray)
 
-    function filterKeys(keys: string[]) {
-      return product
-    }
+  const segmentedItems = Object.keys(product).filter(
+    (e) =>
+      e !== "description" && e !== "image" && e !== "rating" && e !== "title"
+  );
+  const renderSegmentedText = (selectedItem: TFilter) => {
+    return product[selectedItem];
+  };
+
+  // Create segmented items options
+  const segmentedItemsOptions: SegmentedItemOption[] = segmentedItems.map(
+    (item) => ({
+      value: item as TFilter,
+      label: item,
+    })
+  );
   useEffect(() => {
     dispatch(fetchProductsById(id as string));
   }, [dispatch, id]);
   return (
     <div className={styles.singleProduct}>
-        <Card
-          style={{ width: "20rem" }}
-          cover={<img alt="example" src={image} />}
-          loading={status}
-          bordered
-          size="default"
-          actions={[
-            <FastBackwardOutlined key="edit" onClick={() => navigate(-1)} />,
-            <EllipsisOutlined key="ellipsis" onClick={showModal} />,
-          ]}
+      <Card
+        style={{ width: "20rem" }}
+        cover={<img alt="example" src={image} />}
+        loading={status}
+        bordered
+        size="default"
+        actions={[
+          <FastBackwardOutlined key="edit" onClick={() => navigate(-1)} />,
+          <EllipsisOutlined key="ellipsis" onClick={showModal} />,
+        ]}
+      >
+        <Meta title={title} description={description} />
+        <Modal
+          title="Basic Modal"
+          open={isModalOpen}
+          onOk={handleOk}
+          cancelButtonProps={{ disabled: true }}
+          okText="Close"
         >
-          <Meta title={title} description={description} />
-          <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          <Segmented size="large" options={Object.keys(product)} />
-      </Modal>
-        </Card>
+          <Space direction="vertical">
+            <Segmented
+              size="large"
+              options={segmentedItemsOptions}
+              onChange={(selectedItem: TFilter) =>
+                setSelectedSegment(selectedItem)
+              }
+            />
+            <Text>{renderSegmentedText(selectedSegment)}</Text>
+          </Space>
+        </Modal>
+      </Card>
     </div>
   );
 }
