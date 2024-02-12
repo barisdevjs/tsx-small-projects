@@ -84,7 +84,7 @@ export default function SingleProduct() {
   return (
     <div className={styles.singleProduct}>
       <Card
-        style={{ width: "20rem" }}
+        style={{ width: "25rem", padding:"1rem" }}
         cover={<img alt="example" src={image} />}
         loading={status}
         bordered

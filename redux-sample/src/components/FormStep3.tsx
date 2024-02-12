@@ -2,9 +2,8 @@ import { Button, Form, Input, Space } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 function FormStep3() {
-
     return (
-        <Form.List name="users">
+        <Form.List name="users" >
             {(fields, { add, remove }) => (
                 <>
                     {fields.map(({ key, name, ...restField }) => (
@@ -28,7 +27,7 @@ function FormStep3() {
                     ))}
                     <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
                         <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                            Add field
+                            Add Family Members
                         </Button>
                     </Form.Item>
                 </>

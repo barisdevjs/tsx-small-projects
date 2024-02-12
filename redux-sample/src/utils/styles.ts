@@ -2,7 +2,6 @@ import { GlobalToken } from "antd";
 
 export const getFormStyles = (token: GlobalToken) => {
   const contentStyle: React.CSSProperties = {
-    lineHeight: "260px",
     textAlign: "center",
     display:"flex",
     flexDirection:"column",

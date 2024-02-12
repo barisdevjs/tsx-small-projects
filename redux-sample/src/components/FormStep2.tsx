@@ -7,6 +7,8 @@ const prefixSelector = (
     <Form.Item name="prefix" noStyle>
         <Select style={{ width: 70 }}>
             <Option value="90">+90</Option>
+            <Option value="91">+91</Option>
+            <Option value="92">+92</Option>
         </Select>
     </Form.Item>
 );

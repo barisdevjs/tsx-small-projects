@@ -46,7 +46,7 @@ function MultiStepFrom() {
       <Form layout="vertical" initialValues={{ remember: true }} onFinish={onFinish} form={form}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600, marginInline:"auto" }}
+          style={{ maxWidth: 600, marginInline:"auto"}}
           
       >
         <div style={getFormStyles(token)}>{steps[current].content}</div>
