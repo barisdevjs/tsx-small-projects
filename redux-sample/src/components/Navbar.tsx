@@ -12,7 +12,7 @@ import { Content } from "antd/es/layout/layout";
 const items: MenuProps["items"] = [
   {
     label: "Home",
-    key: "/",
+    key: "/home",
     icon: <MailOutlined />,
   },
   {

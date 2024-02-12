@@ -85,7 +85,7 @@ export default function SingleProduct() {
   return (
     <div className={styles.singleProduct}>
       <Card
-        style={{ width: "20rem" }}
+        style={{ width: "25rem", padding:"1rem" }}
         cover={<img alt="example" src={image} />}
         loading={status}
         bordered
@@ -97,7 +97,7 @@ export default function SingleProduct() {
       >
         <Meta title={title} description={description} />
         <Modal
-          title="Basic Modal"
+          title="Product Details"
           open={isModalOpen}
           onOk={handleOk}
           cancelButtonProps={{ disabled: true }}

@@ -7,12 +7,17 @@ import Ecommerce from "./pages/E-Commerce.tsx";
 import MultiStepFrom from "./pages/MultiStepFrom.tsx";
 import Navbar from "./components/Navbar.tsx";
 import SingleProduct from "./components/SingleProduct.tsx";
+import Home from "./pages/Home.tsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Navbar />,
     children: [
+      {
+        path: "/home",
+        element: <Home />,
+      },
       {
         path: "/form",
         element: <MultiStepFrom />,
