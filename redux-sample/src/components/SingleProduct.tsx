@@ -10,6 +10,7 @@ import { capitalizeFirstLetter } from "../utils/helpers";
 import { FastBackwardOutlined, EllipsisOutlined } from "@ant-design/icons";
 import styles from "../styles.module.css";
 import { SegmentedLabeledOption } from "antd/es/segmented";
+
 const { Meta } = Card;
 const { Text } = Typography;
 
@@ -72,11 +73,10 @@ export default function SingleProduct() {
     return product[selectedItem];
   };
 
-  // Create segmented items options
   const segmentedItemsOptions: SegmentedItemOption[] = segmentedItems.map(
     (item) => ({
       value: item as TFilter,
-      label: item,
+      label: capitalizeFirstLetter(item),
     })
   );
   useEffect(() => {

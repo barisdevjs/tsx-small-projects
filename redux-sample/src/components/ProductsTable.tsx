@@ -195,6 +195,7 @@ const ProductsTable: React.FC<{ products: IECommerce[]; status: boolean }> = ({
       style={{ padding: "auto" }}
       loading={{ spinning: status, size: "large" }}
       size="small"
+      rowKey="id"
       pagination={{
         showQuickJumper: true,
         defaultPageSize: 2,
