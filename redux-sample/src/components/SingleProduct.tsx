@@ -72,7 +72,6 @@ export default function SingleProduct() {
     return product[selectedItem];
   };
 
-  // Create segmented items options
   const segmentedItemsOptions: SegmentedItemOption[] = segmentedItems.map(
     (item) => ({
       value: item as TFilter,
@@ -97,7 +96,7 @@ export default function SingleProduct() {
       >
         <Meta title={title} description={description} />
         <Modal
-          title="Basic Modal"
+          title="Product Details"
           open={isModalOpen}
           onOk={handleOk}
           cancelButtonProps={{ disabled: true }}
