@@ -25,8 +25,13 @@ function MultiStepFrom() {
   const [current, setCurrent] = useState(0);
   const [form] = Form.useForm();
 
-  const next = () => {
-    setCurrent(current + 1);
+  const next = async () => {
+    try {
+      await form.validateFields(); // Validate current step's form fields
+      setCurrent(current + 1);
+    } catch (error) {
+      console.error("Validation error:", error);
+    }
   };
 
   const prev = () => {
@@ -36,32 +41,37 @@ function MultiStepFrom() {
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
   const onFinish = async () => {
-    // const values = await form.validateFields(Object.keys(initialData));
-    console.log("values");
-  }
+    try {
+      await form.validateFields();
+      console.log("Form values:", form.getFieldsValue());
+      message.success("Processing complete!");
+    } catch (error) {
+      console.error("Validation error:", error);
+    }
+  };
 
   return (
     <>
       <Steps current={current} items={items} />
-      <Form layout="vertical" initialValues={{ remember: true }} onFinish={onFinish} form={form}
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600, marginInline:"auto"}}
-          
+      <Form
+        layout="vertical"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        form={form}
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600, marginInline: "auto" }}
       >
         <div style={getFormStyles(token)}>{steps[current].content}</div>
       </Form>
-      <div style={{ marginTop:"2rem", textAlign:"center" }}>
+      <div style={{ marginTop: "2rem", textAlign: "center" }}>
         {current < steps.length - 1 && (
           <Button type="primary" onClick={() => next()}>
             Next
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
+          <Button type="primary" onClick={onFinish}>
             Done
           </Button>
         )}
