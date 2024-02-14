@@ -1,9 +1,9 @@
 import { Space, Table, Image, Input, Button, InputRef } from "antd";
 import React, { useRef, useState } from "react";
+import type { Key } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import type { FilterDropdownProps } from "antd/es/table/interface";
-import type { Key } from "react";
 import { IECommerce } from "../types/generalTypes";
 import { Link } from "react-router-dom";
 

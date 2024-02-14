@@ -1,19 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IECommerce } from "../types/generalTypes";
 
-// const initialState: IECommerce = {
-//   id: 0,
-//   title: "",
-//   price: 0,
-//   description: "",
-//   category: "",
-//   image: "",
-//   rating: {
-//     rate: 0,
-//     count: 0,
-//   },
-// };
-
 const initialState: {
   products: IECommerce[];
   status: "idle" | "loading" | "failed";

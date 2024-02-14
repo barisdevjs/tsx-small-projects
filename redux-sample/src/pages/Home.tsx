@@ -112,8 +112,6 @@ function Home() {
 
   const contextValue = useMemo(() => ({ name: "Ant Design" }), []);
 
-  console.log(inputKey);
-
   const handleOk = () => {
     if (inputKey === correctKey) {
       setAuthorized(true);

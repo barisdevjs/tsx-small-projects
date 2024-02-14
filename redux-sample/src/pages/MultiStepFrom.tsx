@@ -1,5 +1,5 @@
 import { Button, message, Steps, theme, Form } from "antd";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { getFormStyles } from "../utils/styles";
 import FormStep1 from "../components/FormStep1";
 import FormStep2 from "../components/FormStep2";
@@ -50,6 +50,11 @@ function MultiStepFrom() {
     }
   };
 
+  const onReset: FormEventHandler<HTMLElement> = () => {
+    form.resetFields();
+    setCurrent(0);
+  };
+
   return (
     <>
       <Steps current={current} items={items} />
@@ -61,6 +66,7 @@ function MultiStepFrom() {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600, marginInline: "auto" }}
+        onReset={onReset} // Assign onReset function to reset the form
       >
         <div style={getFormStyles(token)}>{steps[current].content}</div>
       </Form>
@@ -76,10 +82,18 @@ function MultiStepFrom() {
           </Button>
         )}
         {current > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+          <Button style={{ margin: "0 0 0 8px" }} onClick={() => prev()}>
             Previous
           </Button>
         )}
+        <Button
+          style={{ margin: "0 8px" }}
+          danger
+          type="primary"
+          onClick={onReset}
+        >
+          Reset
+        </Button>
       </div>
     </>
   );

@@ -12,3 +12,10 @@ export interface IECommerce {
   image: string;
   rating: IRate;
 }
+
+/******************* FORM *********************/
+
+export type TFieldType = {
+  username?: string;
+  password?: string;
+};

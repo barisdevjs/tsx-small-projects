@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { DollarOutlined, FormOutlined, HomeOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -13,17 +9,17 @@ const items: MenuProps["items"] = [
   {
     label: "Home",
     key: "/",
-    icon: <MailOutlined />,
+    icon: <HomeOutlined />,
   },
   {
     label: "E-Commerce",
     key: "/ecommerce",
-    icon: <AppstoreOutlined />,
+    icon: <DollarOutlined />,
   },
   {
     label: "Form",
     key: "/form",
-    icon: <SettingOutlined />,
+    icon: <FormOutlined />,
   },
 ];
 

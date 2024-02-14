@@ -1,10 +1,5 @@
-import { Checkbox, Form, Input } from "antd";
-
-type TFieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
+import { Form, Input, Tooltip } from "antd";
+import { TFieldType } from "../types/generalTypes";
 
 function FormStep1() {
   return (
@@ -12,19 +7,37 @@ function FormStep1() {
       <Form.Item<TFieldType>
         label="Username"
         name="username"
+        hasFeedback
+        validateTrigger="onBlur"
         rules={[{ required: true, message: "Please input your username!" }]}
         wrapperCol={{ offset: 0, span: 24 }}
       >
         <Input />
       </Form.Item>
-      <Form.Item<TFieldType>
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
-        wrapperCol={{ offset: 0, span: 24 }}
+      <Tooltip
+        trigger={["focus"]}
+        title={"P@ssw0rd!"}
+        placement="left"
+        overlayClassName="numeric-input"
       >
-        <Input.Password />
-      </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            { required: true, message: "Please input your password!" },
+            { min: 8, message: "Password must be at least 8 characters long!" },
+            {
+              pattern:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+              message:
+                "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character!",
+            },
+          ]}
+          wrapperCol={{ offset: 0, span: 24 }}
+        >
+          <Input.Password />
+        </Form.Item>
+      </Tooltip>
       <Form.Item
         name="confirm"
         label="Confirm Password"
@@ -49,13 +62,6 @@ function FormStep1() {
         wrapperCol={{ offset: 0, span: 24 }}
       >
         <Input.Password />
-      </Form.Item>
-      <Form.Item<TFieldType>
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{ offset: 0, span: 24 }}
-      >
-        <Checkbox>Remember me</Checkbox>
       </Form.Item>
     </>
   );
