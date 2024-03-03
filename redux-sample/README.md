@@ -1,11 +1,35 @@
 # E-Commerce App
 
-This is a basic e-commerce app built using the following technologies:
+Core features used in this web app :
 
 - React
-- Typescript
-- Redux
+- React-router-dom ==> `createBrowserRouter`
+- Typescript ==> `Strict types`
 - Ant Design
-- Vite
+- Redux ==> `createAsyncThunk`
 
-## [Demo](https://github.com/barisdevjs/tsx-small-projects/tree/main/redux-sample)
+## [Demo](https://redux-sample.netlify.app/)
+
+- You will need this password: barisdevjs
+
+## Some features
+
+```js
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navbar />,
+    children: [
+      {
+        path: "/" /*Authorized Only*/,
+        element: <Home /> /*password: barisdevjs*/,
+      },
+      {
+        path: "/form" /*Public*/,
+        element: <MultiStepFrom />,
+      },
+      /* Other routes*/
+    ],
+  },
+]);
+```
