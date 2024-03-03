@@ -33,3 +33,13 @@ export const router = createBrowserRouter([
   },
 ]);
 ```
+
+# ScreenShots
+
+![alt text](https://github.com/barisdevjs/tsx-shopping-card/blob/main/public/screenshot-1.jpg)
+
+![alt text](https://github.com/barisdevjs/tsx-shopping-card/blob/main/public/screenshot-2.jpg)
+
+![alt text](https://github.com/barisdevjs/tsx-shopping-card/blob/main/public/screenshot-3.jpg)
+
+![alt text](https://github.com/barisdevjs/tsx-shopping-card/blob/main/public/screenshot-4.jpg)
